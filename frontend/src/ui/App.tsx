@@ -37,12 +37,17 @@ export default function App() {
   const { t } = useTranslation();
 
   const api = useMemo(() => {
-    // If running in Docker (via window.location), use relative path to nginx proxy if configured,
-    // otherwise fallback to localhost:8000 for local dev
+    // Priority:
+    // 1. VITE_API_URL environment variable (from build time)
+    // 2. Relative path (if running on same host/port or proxied)
+    // 3. Fallback to localhost:8000 for local dev
+    
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl) return new DiagnoseApi(envUrl);
+
     const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    // For production/docker, we might want to use the same host or a specific env var
-    // But for this simple setup, let's stick to 8000 unless we add a proxy
-    return new DiagnoseApi("http://localhost:8000"); 
+    const baseUrl = isLocal && window.location.port !== "8000" ? "http://localhost:8000" : "";
+    return new DiagnoseApi(baseUrl); 
   }, []);
 
 
