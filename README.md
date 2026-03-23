@@ -23,23 +23,41 @@ An intelligent, full-stack health diagnostic application that provides prelimina
 ## 🚦 Getting Started
 
 ### Prerequisites
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed.
+- [Python 3.10+](https://www.python.org/)
+- [Node.js 18+](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
 
 ### Installation & Local Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/AI_Based_Health_Daignostic_System.git
-   cd AI_Based_Health_Daignostic_System
-   ```
 
-2. Start the application using Docker Compose:
-   ```bash
-   docker-compose up --build
-   ```
+You will need to run the **Backend** and the **Frontend** separately in two different terminal windows.
 
-3. Open your browser:
-   - **Frontend**: [http://localhost:3000](http://localhost:3000)
-   - **Backend API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+#### 1. Start the Backend (FastAPI)
+Open a terminal and navigate to the `backend` folder:
+```bash
+cd backend
+# Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the backend server
+python run.py
+```
+*The backend API will be available at [http://localhost:8000](http://localhost:8000).*
+
+#### 2. Start the Frontend (React + Vite)
+Open a **second terminal** and navigate to the `frontend` folder:
+```bash
+cd frontend
+# Install dependencies
+npm install
+
+# Run the frontend in development mode
+npm run dev
+```
+*The frontend will be available at [http://localhost:5173](http://localhost:5173).*
 
 ## 🌐 Deployment
 
