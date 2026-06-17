@@ -1,3 +1,57 @@
+# AI-Based Health Diagnostic System
+
+Short description
+- AI-based web platform that collects patient information, runs ML models to provide diagnoses, recommendations and risk estimates, and captures feedback for improvement.
+
+Quick tech summary
+- Frontend: React + TypeScript, Vite, Tailwind CSS, i18n (see `frontend/package.json`, `frontend/src`).
+- Backend: FastAPI, SQLAlchemy, Pydantic, served with Uvicorn/Gunicorn (see `backend/requirements.txt`, `backend/run.py`, `backend/app`).
+- Database: Configured via `DATABASE_URL` environment variable; defaults to local SQLite at `./health.db` (see `backend/app/database.py`).
+
+How to run locally
+
+1. Backend (Python virtualenv):
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+cd backend
+uvicorn app.main:app --host 0.0.0.0 --port 8003 --reload
+```
+
+2. Frontend (Node):
+
+```bash
+cd frontend
+npm install
+npm run dev -- --port 5173
+```
+
+Notes about environment and deployment
+- The frontend uses `VITE_API_URL` to locate the backend API. For local dev, create `frontend/.env` with `VITE_API_URL=http://localhost:8003` or update as needed.
+- For production deployment the `render.yaml` is preconfigured to use `$PORT` for the backend bind and a static frontend publish path. Update `render.yaml` with your backend URL as needed.
+
+Publishing to GitHub
+- This repository already has a remote named `origin`. To publish your local commits to GitHub run:
+
+```bash
+git add .
+git commit -m "Describe changes"
+git push origin main
+```
+
+- If you prefer to create a new GitHub repository instead, use the GitHub CLI:
+
+```bash
+gh repo create <owner>/<repo> --public --source=. --remote=origin --push
+```
+
+Security note
+- Do not commit secrets or credentials. Ensure `.env` and local virtual environments remain ignored by `.gitignore`.
+
+Next steps
+- If you want, I can: create a new GitHub repository and push these changes for you; add a GitHub Actions workflow for CI; or update `render.yaml` to point to an existing deployed backend URL.
 # AI Based Health Diagnostic System 🩺
 
 An intelligent, full-stack health diagnostic application that provides preliminary health assessments using AI-driven symptom analysis. This system is designed to help users understand potential health conditions based on their symptoms and provides recommended actions, lifestyle tips, and dietary suggestions.
